@@ -1,0 +1,27 @@
+# Manager configuration. Copy to manager.yaml and edit.
+
+listen_addr: "127.0.0.1:8080"
+bridge_name: "incusbr0"
+# state_dir: "/home/anish/Documents/dev/firecracker-go/vms/firecracker-manager"
+state_dir: "/tmp/fcm"
+
+# Required: kernel + raw rootfs template.
+kernel_path: "/home/anish/Documents/test/vmlinux-6.1.155"
+rootfs_template: "/home/anish/rootfs.img"
+
+tap_prefix: "fcmtap"
+mac_prefix: "AA:FC:00"
+
+default_vcpus: 2
+default_mem_mib: 1024
+default_disk_size_mib: 2048
+default_kernel_args: "console=ttyS0 reboot=k panic=1 pci=off"
+
+store:
+  type: "json"            # "json" | "mongo"
+  json:
+    path: ""              # defaults to <state_dir>/vms.json
+  mongo:                  # not implemented yet
+    uri: "mongodb://localhost:27017"
+    database: "firecracker_manager"
+    collection: "vms"
